@@ -2,3 +2,5 @@
 @plugin "daisyui" {
   themes: light --defautl;
 }
+
+@import url("https://fonts.cdnfonts.com/css/against-2");
