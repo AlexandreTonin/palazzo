@@ -14,7 +14,7 @@ export function Navbar() {
   const location = usePathname();
 
   return (
-    <nav className="navbar-center hidden md:flex">
+    <nav className="hidden md:flex">
       <div className="relative flex gap-8 md:gap-4 text-sm font-medium text-white">
         {items.map((item) => {
           const isActive =
