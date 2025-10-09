@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import findPropertyById from "./requests/findPropertyById";
+import findPropertyById from "./requests/properties/findPropertyById";
 
 export function useProperty(id) {
     const [property, setProperty] = useState(null);

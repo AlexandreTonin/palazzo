@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import findAllProperties from "./requests/findAllProperties";
+import findAllProperties from "./requests/properties/findAllProperties";
 
 export function useProperties() {
     const [properties, setProperties] = useState([]);
