@@ -88,7 +88,7 @@ export function LoginForm() {
             <div className="text-center mt-8 text-sm">
                 <span className="text-gray-600">Ainda não possui uma conta? </span>
                 <Link
-                    href="/register"
+                    href="/cadastro"
                     className="text-black font-medium hover:underline"
                 >
                     Cadastrar

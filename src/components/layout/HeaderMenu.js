@@ -11,7 +11,7 @@ import Link from "next/link";
 
 const unauthenticatedLinks = [
   { label: "Login", href: "/login", icon: <LogIn size={16} /> },
-  { label: "Cadastro", href: "/signup", icon: <UserRoundPlus size={16} /> },
+  { label: "Cadastro", href: "/cadastro", icon: <UserRoundPlus size={16} /> },
 ];
 
 const authenticatedLinks = [
