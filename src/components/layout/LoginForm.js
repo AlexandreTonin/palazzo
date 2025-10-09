@@ -1,13 +1,16 @@
 'use client'
 import { useState } from 'react'
-import { KeyRound, Mail } from 'lucide-react'
+import { KeyRound, LoaderCircle, Mail } from 'lucide-react'
 import Link from 'next/link'
 import { FormInput } from '../ui/FormInput'
 import { Button } from '../ui/Button'
 import { SocialDivider } from '../ui/SocialDivider'
 import { GoogleLoginButton } from '../ui/GoogleLoginButton'
+import { useLogin } from '@/hooks/useLogin'
 
 export function LoginForm() {
+    const { login, error, isLoading } = useLogin()
+
     const [showPassword, setShowPassword] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -15,21 +18,7 @@ export function LoginForm() {
     const handleSubmit = (e) => {
         e.preventDefault()
 
-        console.log('Login attempt:', {
-            email,
-            password,
-            timestamp: new Date().toISOString(),
-            userAgent: navigator.userAgent
-        })
-
-        console.log('Form submitted successfully!')
-    }
-
-    const handleGoogleLogin = () => {
-        console.log('Google login attempt:', {
-            method: 'google',
-            timestamp: new Date().toISOString()
-        })
+        login({ email, password })
     }
 
     return (
@@ -38,6 +27,8 @@ export function LoginForm() {
             <h1 className="text-xl font-bold text-center md:mb-8 mb-4 text-gray-900">
                 LOGIN
             </h1>
+
+            {error && <p className="text-red-500 text-center">{error}</p>}
 
             <form onSubmit={handleSubmit} className="xl:space-y-6 space-y-3">
                 {/* Email Field */}
@@ -74,7 +65,7 @@ export function LoginForm() {
 
                 {/* Login Button */}
                 <Button type="submit" variant="primary">
-                    Login
+                    {isLoading ? <LoaderCircle className='animate-spin' /> : 'Login'}
                 </Button>
             </form>
 
@@ -82,7 +73,7 @@ export function LoginForm() {
             <SocialDivider />
 
             {/* Google Login Button */}
-            <GoogleLoginButton onClick={handleGoogleLogin} />
+            <GoogleLoginButton onClick={() => { }} />
 
             {/* Register Link */}
             <div className="text-center mt-8 text-sm">
