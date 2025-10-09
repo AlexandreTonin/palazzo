@@ -1,6 +1,6 @@
 export default function AuthLayout({ children }) {
   return (
-    <main className="lg:grid lg:grid-cols-2 p-8 gap-34 h-screen">
+    <main className="xl:grid xl:grid-cols-2 md:p-16 p-6 xl:gap-34 h-screen">
       {children}
     </main>
   );
