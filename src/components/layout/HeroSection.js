@@ -23,7 +23,7 @@ export function HeroSection() {
         />
       </div>
 
-      <div className="absolute bottom-0 left-0 w-full h-16 bg-gradient-to-b from-transparent to-white"></div>
+      <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-white"></div>
     </section>
   );
 }

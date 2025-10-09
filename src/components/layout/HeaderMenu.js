@@ -42,7 +42,7 @@ export function HeaderMenu({ isAuthenticated }) {
         {navbarLinks.map((link) => (
           <li
             key={link.href}
-            className="hover:bg-white/15 rounded-md block md:hidden"
+            className="rounded-md block md:hidden"
           >
             <Link href={link.href}>{link.label}</Link>
           </li>
@@ -51,7 +51,7 @@ export function HeaderMenu({ isAuthenticated }) {
         <hr className="my-2 text-gray-300 block md:hidden"></hr>
 
         {links.map((link) => (
-          <li key={link.href} className="hover:bg-white/15 rounded-md">
+          <li key={link.href} className="rounded-md">
             <Link href={link.href} className="flex items-center gap-3">
               {link.icon} {link.label}
             </Link>
