@@ -1,4 +1,3 @@
-import { Header } from "@/components/layout/Header";
 import "./globals.css";
 
 export const metadata = {
@@ -10,10 +9,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body cz-shortcut-listen="true">
-        <Header />
-        {children}
-      </body>
+      <body cz-shortcut-listen="true">{children}</body>
     </html>
   );
 }
