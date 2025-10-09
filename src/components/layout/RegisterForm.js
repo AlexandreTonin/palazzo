@@ -1,16 +1,20 @@
 'use client'
 import { useState } from "react";
-import { KeyRound, Mail } from "lucide-react";
+import { KeyRound, LoaderCircle, Mail } from "lucide-react";
 import Link from "next/link";
 import { FormInput } from '../ui/FormInput'
 import { Button } from '../ui/Button'
 import { SocialDivider } from '../ui/SocialDivider'
 import { GoogleLoginButton } from '../ui/GoogleLoginButton'
+import { useRegister } from "@/hooks/useRegister";
 
 export function RegisterForm() {
+    const { register, error, isLoading, success } = useRegister()
+
     const [formData, setFormData] = useState({
-        fullName: '',
+        name: '',
         email: '',
+        phone: '',
         password: '',
         confirmPassword: ''
     })
@@ -31,23 +35,25 @@ export function RegisterForm() {
             return
         }
 
-        console.log('Registration attempt:', {
-            fullName: formData.fullName,
+        register({
+            name: formData.name,
             email: formData.email,
+            phone: formData.phone.toString(),
             password: formData.password,
-            confirmPassword: formData.confirmPassword,
-            timestamp: new Date().toISOString()
+            confirmPassword: formData.confirmPassword
         })
 
-        console.log('Form submitted successfully!')
+        if (success) {
+            setFormData({
+                name: '',
+                email: '',
+                phone: '',
+                password: '',
+                confirmPassword: ''
+            })
+        }
     }
 
-    const handleGoogleLogin = () => {
-        console.log('Google registration attempt:', {
-            method: 'google',
-            timestamp: new Date().toISOString()
-        })
-    }
     return (
         <div className="w-full bg-white xl:w-[80%]">
             {/* Login Title */}
@@ -55,14 +61,26 @@ export function RegisterForm() {
                 CADASTRO
             </h1>
 
+            {error && <p className="text-red-500 text-center">Erro ao realizar cadastro</p>}
+            {success && <p className="text-green-500 text-center">Usuário criado com sucesso</p>}
+
             <form onSubmit={handleSubmit} className="xl:space-y-6 space-y-3">
                 <FormInput
                     label="Nome completo"
                     type="text"
                     placeholder="Digite seu nome completo"
                     required
-                    value={formData.fullName}
-                    onChange={(e) => handleInputChange('fullName', e.target.value)}
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                />
+
+                <FormInput
+                    label="Telefone"
+                    type="number"
+                    placeholder="Digite seu telefone"
+                    required
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
                 />
 
                 {/* Email Field */}
@@ -117,8 +135,8 @@ export function RegisterForm() {
                 />
 
                 {/* Register Button */}
-                <Button type="submit" variant="primary">
-                    Cadastrar
+                <Button type="submit" variant="primary" disabled={isLoading || success}>
+                    {isLoading ? <LoaderCircle className='animate-spin' /> : 'Cadastrar'}
                 </Button>
             </form>
 
@@ -126,7 +144,7 @@ export function RegisterForm() {
             <SocialDivider />
 
             {/* Google Login Button */}
-            <GoogleLoginButton onClick={handleGoogleLogin} />
+            <GoogleLoginButton onClick={() => { }} />
 
             {/* Register Link */}
             <div className="text-center mt-8 text-sm">
